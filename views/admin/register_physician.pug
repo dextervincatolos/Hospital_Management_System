@@ -1,0 +1,55 @@
+include ../include/_header.pug
+
+main.container
+    div.py-5.text-center
+        h4 Physician Registration Form
+         
+    div.row.g-5
+        div.col-md-12.col-lg-12
+           
+            form.needs-validation.was-validated(novalidate="")
+                div.col-sm-12
+                    label(for="firstName").form-label License Number:
+                    input(type="text" placeholder="" value="" required="").form-control#license
+                    div.invalid-feedback
+                        | Valid License is required.
+                  
+                div.row.g-3
+                    div.col-sm-6
+                        label(for="firstName").form-label First name
+                        input(type="text" placeholder="" value="" required="").form-control#firstName
+                        div.invalid-feedback
+                            | Valid first name is required.
+                 
+                    div.col-sm-6
+                        label(for="lastName").form-label Last name
+                        input(type="text" placeholder="" value="" required="").form-control#lastName
+                        div.invalid-feedback
+                            | Valid last name is required.
+    
+                    div.col-md-4
+                        label(for="Gender").form-label Gender
+                        select.form-select#Gender(required="")
+                            option(value="") Choose...
+                            option(value="Male") Male
+                            option(value="Female") Female
+                   
+                        div.invalid-feedback
+                            | Please select a valid Gender.
+    
+                    div.col-md-4
+                        label(for="Specialty").form-label Specialty
+                        input(type="text" placeholder="" required="").form-control#Specialty
+                        div.invalid-feedback
+                            | Specialty is required.
+                 
+
+                    div.col-md-4
+                        label(for="Contact_number").form-label Contact Number
+                        input(type="text" placeholder="" required="").form-control#Contact_number
+                        div.invalid-feedback
+                            | Contact Number is required.
+    
+                    hr.my-4
+    
+                button.w-100.btn.btn-primary.btn-md(type="submit") Register

@@ -1,0 +1,49 @@
+include ../include/_header.pug
+
+div.container-fluid
+    div.row
+        
+        include ../include/_navbar.pug
+
+        main.col-md-9.ms-sm-auto.col-lg-10.px-md-4.py-5
+            h1.h4 Doctors Record :
+            div.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
+                
+                button.btn.btn-sm.btn-primary.d-flex.align-items-center.text-white(type="button")
+                    
+                    i.bi.bi-person-add
+                    | Register a Physician
+                
+            
+                div.btn-toolbar.mb-2.mb-md-0
+                    div.btn-group.me-2
+                        button(type="button").btn.btn-sm.btn-outline-secondary Share
+                        button(type="button").btn.btn-sm.btn-outline-secondary Export
+                
+                        button(type="button").btn.btn-sm.btn-outline-secondary.dropdown-toggle.d-flex.align-items-center.gap-1 This week
+                
+            div.table-responsive.small
+                table.table.table-striped.table-sm
+                    thead
+                        tr
+                            th(scope="col") Patient Name
+                            th(scope="col") Birthday
+                            th(scope="col") Gender
+                            th(scope="col") Contact Number
+                            th(scope="col") Emergency Contact Number
+                            th(scope="col") Assigned Physician
+                            th(scope="col") Status
+                            th(scope="col") Options
+                    tbody
+                        tr
+                            td
+                                i.bi.bi-circle-fill
+                            td 1,001
+                            td random
+                            td data
+                            td placeholder
+                            td text
+                            td text
+                            td 
+                                i.bi.bi-pencil-square  |  
+                                i.bi.bi-trash

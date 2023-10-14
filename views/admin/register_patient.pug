@@ -1,0 +1,67 @@
+include ../include/_header.pug
+
+main.container
+    div.py-5.text-center
+        h4 Patient Registration Form
+         
+    div.row.g-5
+        div.col-md-12.col-lg-12
+           
+            form.needs-validation.was-validated(novalidate="")
+                div.col-sm-12
+                    label(for="physician").form-label Assigned Physician:
+                    input(type="text" name="physician" placeholder="" value="" required="").form-control#physician
+                    div.invalid-feedback
+                        | Assined Physician is required.
+                  
+                div.row.g-3
+                    div.col-sm-6
+                        label(for="firstName").form-label Patient First name
+                        input(type="text" placeholder="" value="" required="").form-control#firstName
+                        div.invalid-feedback
+                            | Valid first name is required.
+                 
+                    div.col-sm-6
+                        label(for="lastName").form-label Patient Last name
+                        input(type="text" placeholder="" value="" required="").form-control#lastName
+                        div.invalid-feedback
+                            | Valid last name is required.
+    
+                    div.col-md-4
+                        label(for="Gender").form-label Gender
+                        select.form-select#Gender(required="")
+                            option(value="") Choose...
+                            option(value="Male") Male
+                            option(value="Female") Female
+                   
+                        div.invalid-feedback
+                            | Please select a valid Gender.
+    
+                    div.col-md-4
+                        label(for="Birthday").form-label Birthday
+                        input(type="text" placeholder="" required="").form-control#Birthday
+                        div.invalid-feedback
+                            | Birthday is required.
+                 
+
+                    div.col-md-4
+                        label(for="status").form-label Patient Status
+                        input(type="text" placeholder="" name="status" required="").form-control#status
+                        div.invalid-feedback
+                            | Status is required.
+
+                    div.col-sm-6
+                        label(for="contactnumber").form-label Patient Contact Number
+                        input(type="text" placeholder="" name="contactnumber" value="" required="").form-control#contactnumber
+                        div.invalid-feedback
+                            |Contatct number is required.
+                 
+                    div.col-sm-6
+                        label(for="econtactnumber").form-label Patient Emergency Contact Number
+                        input(type="text" placeholder="" name="econtactnumber" value="" required="").form-control#econtactnumber
+                        div.invalid-feedback
+                            | Emergency Contact Number is required.
+    
+                    hr.my-4
+    
+                button.w-100.btn.btn-primary.btn-md(type="submit") Register

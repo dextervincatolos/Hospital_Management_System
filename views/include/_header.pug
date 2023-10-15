@@ -17,13 +17,13 @@ html(lang="en")
           
         ul.dropdown-menu.dropdown-menu-end.shadow(aria-labelledby="bd-theme-text")
             li
-                button.dropdown-item.d-flex.align-items-center.text-primary(type="button" data-bs-theme-value="light" aria-pressed="true")
+                button.dropdown-item.d-flex.align-items-center.text-primary(type="button" data-bs-theme-value="light" aria-pressed="true" onclick="location.href='/register_physician'")
                     b
                         i.bi.bi-person-workspace
                         | Register a Physician
                
             li
-                button.dropdown-item.d-flex.align-items-center.text-danger(type="button" data-bs-theme-value="dark" aria-pressed="false")
+                button.dropdown-item.d-flex.align-items-center.text-danger(type="button" data-bs-theme-value="dark" aria-pressed="false" onclick="location.href='/register_patient'")
                     b
                         i.bi.bi-person-hearts
                         | Create Patient Profile 
@@ -32,7 +32,7 @@ html(lang="en")
     
 
     header.navbar.sticky-top.bg-info.flex-md-nowrap.p-0.shadow(data-bs-theme="dark")
-        a.navbar-brand.col-md-3.col-lg-2.me-0.px-3.fs-6.text-black(href="#")
+        a.navbar-brand.col-md-3.col-lg-2.me-0.px-3.fs-6.text-black(onclick="location.href='/'")
             img(src="img/medical_logo.png" width="40" alt="compaany logo" class="m-2")
             b HOSPITAL MANAGEMENT SYSTEM
        

@@ -9,7 +9,7 @@ div.container-fluid
             h1.h4 Doctors Record :
             div.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
                 
-                button.btn.btn-sm.btn-primary.d-flex.align-items-center.text-white(type="button")
+                button.btn.btn-sm.btn-primary.d-flex.align-items-center.text-white(type="button"  onclick="location.href='/register_physician'")
                     
                     i.bi.bi-person-add
                     | Register a Physician
@@ -17,10 +17,10 @@ div.container-fluid
             
                 div.btn-toolbar.mb-2.mb-md-0
                     div.btn-group.me-2
-                        button(type="button").btn.btn-sm.btn-outline-secondary Share
-                        button(type="button").btn.btn-sm.btn-outline-secondary Export
+                        button.btn.btn-sm.btn-outline-secondary(type="button") Share
+                        button.btn.btn-sm.btn-outline-secondary(type="button") Export
                 
-                        button(type="button").btn.btn-sm.btn-outline-secondary.dropdown-toggle.d-flex.align-items-center.gap-1 This week
+                        button.btn.btn-sm.btn-outline-secondary.dropdown-toggle.d-flex.align-items-center.gap-1(type="button") This week
                 
             div.table-responsive.small
                 table.table.table-striped.table-sm
@@ -35,15 +35,28 @@ div.container-fluid
                             th(scope="col") # of Patients Assigned
                             th(scope="col") Options
                     tbody
+                    each dr in physicians
                         tr
                             td
-                                i.bi.bi-circle-fill
-                            td 1,001
-                            td random
-                            td data
-                            td placeholder
-                            td text
+                                if dr.status === 'on-duty'
+                                    i.bi.bi-circle-fill.text-success
+                                else if dr.status === 'off-duty'
+                                    i.bi.bi-circle-fill.text-danger
+                            td=dr.license
+                            td=dr.firstname+" "+dr.lastname
+                            td=dr.gender
+                            td=dr.cnumber
+                            td=dr.specialty
                             td text
                             td 
-                                i.bi.bi-pencil-square  |  
-                                i.bi.bi-trash
+                                a.text-warning(href=`/update_physician?id=${dr._id}` title="edit")
+                                    i.bi.bi-pencil-square
+                                |  | 
+                                a.delete.text-danger(data-id=dr._id title="Delete")
+                                    i.bi.bi-trash
+                                |  | 
+                                a.text-primary(href="#" title="view")
+                                    i.bi.bi-eye
+                                    
+script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer")
+script(src="js/physicians.js")

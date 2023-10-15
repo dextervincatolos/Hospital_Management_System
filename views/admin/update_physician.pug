@@ -2,28 +2,29 @@ include ../include/_header.pug
 
 main.container
     div.py-5.text-center
-        h4 Physician Registration Form
+        h4 Update Physician Data
          
     div.row.g-5
         div.col-md-12.col-lg-12
            
-            form.needs-validation.was-validated#registerphysician(action="/api/users" method="POST" novalidate="")
+            form.needs-validation.was-validated#updatephysician(method="POST" novalidate="")
+                input(type="hidden" placeholder="" value=user._id required="" name="_id").form-control#license
                 div.col-sm-12
                     label(for="firstName").form-label License Number:
-                    input(type="text" placeholder="" value="" required="" name="license").form-control#license
+                    input(type="text" placeholder="" value=user.license required="" name="license" readonly='').form-control#license
                     div.invalid-feedback
                         | Valid License is required.
                   
                 div.row.g-3
                     div.col-sm-6
                         label(for="firstName").form-label First name
-                        input(type="text" placeholder="" value="" required="" name="firstname").form-control#firstName
+                        input(type="text" placeholder="" value=user.firstname required="" name="firstname").form-control#firstName
                         div.invalid-feedback
                             | Valid first name is required.
                  
                     div.col-sm-6
                         label(for="lastName").form-label Last name
-                        input(type="text" placeholder="" value="" required="" name="lastname").form-control#lastName
+                        input(type="text" placeholder="" value=user.lastname required="" name="lastname").form-control#lastName
                         div.invalid-feedback
                             | Valid last name is required.
     
@@ -31,28 +32,28 @@ main.container
                         label(for="Gender").form-label Gender
                         select.form-select#Gender( name="gender" required="")
                             option(value="") Choose...
-                            option(value="Male") Male
-                            option(value="Female") Female
+                            option(value="Male", selected=user.gender === 'Male') Male
+                            option(value="Female", selected=user.gender === 'Female' ) Female
                    
                         div.invalid-feedback
                             | Please select a valid Gender.
     
                     div.col-md-4
                         label(for="Specialty").form-label Specialty
-                        input(type="text" name="specialty" placeholder="" required="").form-control#Specialty
+                        input(type="text" name="specialty" placeholder="" required="" value=user.specialty).form-control#Specialty
                         div.invalid-feedback
                             | Specialty is required.
                  
 
                     div.col-md-4
                         label(for="Contact_number").form-label Contact Number
-                        input(type="text" name="cnumber" placeholder="" required="").form-control#Contact_number
+                        input(type="text" name="cnumber" placeholder="" required="" value=user.cnumber).form-control#Contact_number
                         div.invalid-feedback
                             | Contact Number is required.
     
                     hr.my-4
     
-                button.w-100.btn.btn-primary.btn-md(type="submit" name="submit") Register
+                button.w-100.btn.btn-primary.btn-md(type="submit" name="submit") Update Record
 
 script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer")
 script(src="js/physicians.js")

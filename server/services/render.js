@@ -1,6 +1,7 @@
 const axios = require('axios');
 var sysAdmin = require('../model/admin_model');
 var physician_collection = require('../model/user_model');
+var patient_collection = require('../model/patient_model');
 
 exports.admin_login = (req, res) => {
     res.render('admin/admin_login',{title:"HMS | Administrator Login Page"});   
@@ -24,12 +25,17 @@ exports.admin_dashboard = async (req, res) => {
           return res.status(404).send('No record found');
       }
 
+       const new_patient = await patient_collection.countDocuments({ status: 'New Patient' });
+       const established_patient = await patient_collection.countDocuments({ status: 'Established Patient' });
+        const outpatient = await patient_collection.countDocuments({ status: 'Outpatient' });
+        const inpatient = await patient_collection.countDocuments({ status: 'Inpatient' });
+
       // Count the number of on-duty users
       const onDutyCount = await physician_collection.countDocuments({ status: 'on-duty' });
       //Count the number of off-duty users
       const offDutyCount = await physician_collection.countDocuments({ status: 'off-duty' });
     
-      res.render('admin/admin_dashboard', {title:"HMS | Admin Dashboard",username,getadminData,onDutyCount,offDutyCount});
+      res.render('admin/admin_dashboard', {title:"HMS | Admin Dashboard",username,getadminData,onDutyCount,offDutyCount,new_patient,established_patient,outpatient,inpatient});
   } catch (error) {
       return res.status(500).send(error.message);
   }

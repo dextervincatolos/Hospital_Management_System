@@ -9,8 +9,7 @@ div.container-fluid
                 header
                     div.pricing-header.p-3.pb-md-4.mx-auto.text-center
                         h5.display-6.fw-normal.text-body-emphasis Patients Status
-                        p.fs-6.text-body-secondary Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.
-
+                      
     
     
                     div.row.row-cols-1.row-cols-md-4.mb-3.text-center
@@ -20,7 +19,7 @@ div.container-fluid
                                     h5.my-0.fw-normal New Patient
                                 
                                 div.card-body
-                                    h1.card-title.pricing-card-title.text-info 10
+                                    h1.card-title.pricing-card-title.text-info=new_patient
                                 
                                     button.w-100.btn.btn-md.btn-outline-primary(type="button") View Report
                                 
@@ -30,7 +29,7 @@ div.container-fluid
                                     h5.my-0.fw-normal Established Patient
                                 
                                 div.card-body
-                                    h1.card-title.pricing-card-title.text-success 15
+                                    h1.card-title.pricing-card-title.text-success=established_patient
                             
                                     button.w-100.btn.btn-md.btn-outline-primary(type="button") View Report
                                 
@@ -40,7 +39,7 @@ div.container-fluid
                                     h5.my-0.fw-normal Outpatient
                                 
                                 div.card-body
-                                    h1.card-title.pricing-card-title.text-warning 29
+                                    h1.card-title.pricing-card-title.text-warning=outpatient
                             
                                     button.w-100.btn.btn-md.btn-outline-primary(type="button") View Report
                                 
@@ -50,7 +49,7 @@ div.container-fluid
                                     h5.my-0.fw-normal Inpatient
                                 
                                 div.card-body
-                                    h1.card-title.pricing-card-title.text-danger 29
+                                    h1.card-title.pricing-card-title.text-danger=inpatient
                                 
                                     button.w-100.btn.btn-md.btn-outline-primary(type="button") View Report
                                     
@@ -60,9 +59,7 @@ div.container-fluid
                 header
                     div.pricing-header.p-3.pb-md-4.mx-auto.text-center
                         h5.display-6.fw-normal.text-body-emphasis Doctors Status
-                        p.fs-6.text-body-secondary Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.
-            
-            
+                        
                     div.row.row-cols-1.row-cols-md-2.mb-3.text-center
                         
                         div.col

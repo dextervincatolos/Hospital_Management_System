@@ -52,6 +52,20 @@ main.container
                             | Contact Number is required.
     
                     hr.my-4
+                    
+
+                    div.col-sm-6
+                        label(for="username").form-label Username
+                        input(type="text" placeholder="" name="username" value=user.username required="").form-control#username
+                        div.invalid-feedback
+                            | username is required.
+                 
+                    div.col-sm-6
+                        label(for="password").form-label Password
+                        input(type="password" placeholder="" name="password" required="").form-control#password
+                        div.invalid-feedback
+                            | Password is required.
+                    hr.my-4
     
                 button.w-100.btn.btn-primary.btn-md(type="submit" name="submit") Update Record
 

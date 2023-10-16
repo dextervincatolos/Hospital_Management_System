@@ -1,14 +1,24 @@
 const axios = require('axios');
+var User = require('../model/admin_model');
 
-
-exports.home= (req, res) => {
-    //res.render('login',{title:"HMS | Login Page",message:"Im a PUG!"});
-    res.render('admin/admin_dashboard',{title:"HMS | Admin Dashboard"});
-    //res.render('admin/admin_view_doctors',{title:"HMS | Doctors page"});
-    //res.render('admin/admin_view_patients',{title:"HMS | Patients page"});
-    //res.render('admin/register_physician',{title:"HMS | Register Physician"});
-    //res.render('admin/register_patient',{title:"HMS | Register Patient"});
+exports.admin_login = (req, res) => {
+    res.render('admin/admin_login',{title:"HMS | Administrator Login Page"});   
 }
+
+exports.admin_dashboard = async (req, res) => {
+    try {
+      const userId = req.session.userId;
+      const user = await User.findById(userId);
+      
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+      
+      res.render('admin/admin_dashboard', {title:"HMS | Admin Dashboard",user });
+    } catch (error) {
+      return res.status(500).send(error.message);
+    }
+  }
 
 exports.new_physician = (req, res) => {
         res.render('admin/register_physician',{title:"HMS | Physician Registration Page"});   

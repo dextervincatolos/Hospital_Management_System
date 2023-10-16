@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const path = require('path');
+const session = require('express-session');
 
 const dbconnection = require('./server/database/connection');
 
@@ -30,6 +31,13 @@ app.set("view engine", "pug");//if pug files are located just inside the views f
 app.use('/css',express.static(path.resolve(__dirname,"assets/css")))
 app.use('/js',express.static(path.resolve(__dirname,"assets/js")))
 app.use('/img',express.static(path.resolve(__dirname,"assets/img")))
+
+app.use(express.json());
+app.use(session({
+    secret:'secret',
+    resave:false,
+    saveUninitialized:true
+}));
 
 //load routers
 app.use('/',require('./server/routes/router'))

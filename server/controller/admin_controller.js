@@ -1,15 +1,16 @@
 const { response } = require('express');
-var User = require('../model/admin_model');
+var sysadmin = require('../model/admin_model');
 const bcrypt = require('bcrypt');
 
 
 exports.validate_login = async (req, res) => {
     const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const admin_data = await sysadmin.findOne({ username });
   
-    if (user && await bcrypt.compare(password, user.password)) {
-      req.session.userId = user._id;
-      res.redirect('/admin_dashboard');
+    if (admin_data && await bcrypt.compare(password, admin_data.password)) {
+        req.session.uid = admin_data._id;
+        req.session.username = admin_data.username;
+        res.redirect('/admin_dashboard');
 
       //res.send('Login successful');
     } else {

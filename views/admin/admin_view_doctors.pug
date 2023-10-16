@@ -32,7 +32,6 @@ div.container-fluid
                             th(scope="col") Gender
                             th(scope="col") Contact Number
                             th(scope="col") Specialty
-                            th(scope="col") # of Patients Assigned
                             th(scope="col") Options
                     tbody
                     each dr in physicians
@@ -47,7 +46,6 @@ div.container-fluid
                             td=dr.gender
                             td=dr.cnumber
                             td=dr.specialty
-                            td text
                             td 
                                 a.text-warning(href=`/update_physician?id=${dr._id}` title="edit")
                                     i.bi.bi-pencil-square

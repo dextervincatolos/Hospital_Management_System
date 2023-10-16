@@ -7,27 +7,28 @@ main.container
     div.row.g-5
         div.col-md-12.col-lg-12
            
-            form.needs-validation.was-validated#registerpatient(action="/api/patients" method="POST" novalidate="")
+            form.needs-validation.was-validated#updatepatient(action="/api/patients" method="POST" novalidate="")
+                input(type="hidden" placeholder="" value=patient._id required="" name="_id").form-control#license
                 div.col-sm-12
                     label(for="physician").form-label Assigned Physician:
-                    //- input(type="text" name="physician" placeholder="" value="" required="").form-control#physician
+                    //input(type="text" name="physician" placeholder="" value=patient.physician required="").form-control#physician
                     select.form-select#physician(required="" name="physician")
                         option(value="") Select Physician...
                         each doctor in doctors
-                            option(value=doctor._id)= doctor.firstname + " " + doctor.lastname
+                            option(value=doctor._id , selected=patient.physician=== doctor._id)= doctor.firstname + " " + doctor.lastname 
                     div.invalid-feedback
                         | Assined Physician is required.
                   
                 div.row.g-3
                     div.col-sm-6
                         label(for="firstName").form-label Patient First name
-                        input(type="text" placeholder="" value="" required="" name="firstname").form-control#firstName
+                        input(type="text" placeholder="" value=patient.firstname required="" name="firstname").form-control#firstName
                         div.invalid-feedback
                             | Valid first name is required.
                  
                     div.col-sm-6
                         label(for="lastName").form-label Patient Last name
-                        input(type="text" placeholder="" value="" required="" name="lastname").form-control#lastName
+                        input(type="text" placeholder="" value=patient.lastname required="" name="lastname").form-control#lastName
                         div.invalid-feedback
                             | Valid last name is required.
     
@@ -35,40 +36,40 @@ main.container
                         label(for="Gender").form-label Gender
                         select.form-select#Gender(required="" name="gender")
                             option(value="") Choose...
-                            option(value="Male") Male
-                            option(value="Female") Female
+                            option(value="Male", selected=patient.gender === 'Male') Male
+                            option(value="Female", selected=patient.gender === 'Female') Female
                    
                         div.invalid-feedback
                             | Please select a valid Gender.
     
                     div.col-md-4
                         label(for="Birthday").form-label Birthday
-                        input(type="date" placeholder="" required="" name="birthday").form-control#Birthday
+                        input(type="date" placeholder="" required="" name="birthday" value=patient.birthday.toString().split('T')[0]).form-control#Birthday
                         div.invalid-feedback
                             | Birthday is required.
                  
 
                     div.col-md-4
                         label(for="status").form-label Patient Status
-                        //- input(type="text" placeholder="" name="status" required="").form-control#status
+                        //- input(type="text" placeholder="" name="status" required="" value=patient.status).form-control#status
                         select.form-select#status(required="" name="status")
                             option(value="") Select Patient Status...
-                            option(value="New Patient") New Patient
-                            option(value="Established Patient") Established Patient
-                            option(value="Outpatient") Outpatient
-                            option(value="Inpatient") Inpatient
+                            option(value="New Patient" , selected=patient.status === 'New Patient') New Patient
+                            option(value="Established Patient" , selected=patient.status === 'Established Patient') Established Patient
+                            option(value="Outpatient" , selected=patient.status === 'Outpatient') Outpatient
+                            option(value="Inpatient" , selected=patient.status === 'Inpatient') Inpatient
                         div.invalid-feedback
                             | Status is required.
 
                     div.col-sm-6
                         label(for="contactnumber").form-label Patient Contact Number
-                        input(type="text" placeholder="" name="cnumber" value="" required="").form-control#contactnumber
+                        input(type="text" placeholder="" name="cnumber" value=patient.cnumber required="").form-control#contactnumber
                         div.invalid-feedback
-                            | Contatct number is required.
+                            |Contatct number is required.
                  
                     div.col-sm-6
                         label(for="econtactnumber").form-label Patient Emergency Contact Number
-                        input(type="text" placeholder="" name="ecnumber" value="" required="").form-control#econtactnumber
+                        input(type="text" placeholder="" name="ecnumber" value=patient.ecnumber required="").form-control#econtactnumber
                         div.invalid-feedback
                             | Emergency Contact Number is required.
     
@@ -76,13 +77,13 @@ main.container
 
                     div.col-sm-6
                         label(for="username").form-label Username
-                        input(type="text" placeholder="" name="username" value="" required="").form-control#username
+                        input(type="text" placeholder="" name="username" value=patient.username required="").form-control#username
                         div.invalid-feedback
                             | username is required.
                  
                     div.col-sm-6
                         label(for="password").form-label Password
-                        input(type="password" placeholder="" name="password" value="" required="").form-control#password
+                        input(type="password" placeholder="" name="password" required="").form-control#password
                         div.invalid-feedback
                             | Password is required.
                     hr.my-4

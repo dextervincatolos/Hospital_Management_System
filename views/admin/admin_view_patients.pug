@@ -9,10 +9,10 @@ div.container-fluid
             h1.h4 Doctors Record :
             div.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pt-3.pb-2.mb-3.border-bottom
                 
-                button.btn.btn-sm.btn-primary.d-flex.align-items-center.text-white(type="button")
+                button.btn.btn-sm.btn-primary.d-flex.align-items-center.text-white(type="button" onclick="location.href='/register_patient'")
                     
                     i.bi.bi-person-add
-                    | Register a Physician
+                    | Register a Patient
                 
             
                 div.btn-toolbar.mb-2.mb-md-0
@@ -35,15 +35,24 @@ div.container-fluid
                             th(scope="col") Status
                             th(scope="col") Options
                     tbody
+                    each patient in patients
                         tr
-                            td
-                                i.bi.bi-circle-fill
-                            td 1,001
-                            td random
-                            td data
-                            td placeholder
-                            td text
-                            td text
+                            td=patient.firstname + " " + patient.lastname
+                            td=patient.birthday.toString().split('T')[0]
+                            td=patient.gender
+                            td=patient.cnumber
+                            td=patient.ecnumber
+                            td=patient.physician
+                            td=patient.status
                             td 
-                                i.bi.bi-pencil-square  |  
-                                i.bi.bi-trash
+                                a.text-warning(href=`/update_patient?id=${patient._id}` title="edit")
+                                    i.bi.bi-pencil-square
+                                |  | 
+                                a.delete.text-danger(data-id=patient._id title="Delete")
+                                    i.bi.bi-trash
+                                |  | 
+                                a.text-primary(href="#" title="view")
+                                    i.bi.bi-eye
+                                    
+script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer")
+script(src="js/patients.js")

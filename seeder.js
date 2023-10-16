@@ -11,7 +11,7 @@ db.once('open', async () => {
     await Admin.deleteMany({}); // Clear any existing admin records
 
     const adminData = {
-      username: 'admin',
+      username: 'administrator',
       password: await bcrypt.hash('adminpassword', 10),
       email: 'admin@example.com'
     };

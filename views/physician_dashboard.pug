@@ -1,0 +1,26 @@
+include include/_header.pug
+
+main.container
+    div.py-5.text-center
+        
+         
+    div.row.g-5
+        div.col-md-12.col-lg-12.row
+            div.col-md-2
+                img(src="img/patient.png" width="75%" alt="Patient" class="m-2")
+            div.col-md-10.text-center
+                h3.py-5 Patient #: #{patientData._id}
+                h6.text-primary Assigned Physician : Dr. #{physician.firstname + " " + physician.lastname}
+            
+            hr
+            div.col-md-12.col-lg-12.px-5.py-2
+                h4=patientData.firstname+" "+patientData.lastname
+                h6 Gender: #{patientData.gender}
+                h6 Birth date: #{patientData.birthday.toString().split('T')[0]}
+                h6 Contact Number: #{patientData.cnumber}
+                h6.text-danger Emergency Contact: #{patientData.ecnumber}
+                h6
+                    button.btn.btn-lg.form-control.btn-info(disabled="")=patientData.status
+
+            button.btn.btn-lg.form-control.btn-primary(type=submit name="submit"   onclick="location.href='/logout'") Log out
+            

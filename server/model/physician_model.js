@@ -31,13 +31,18 @@ var Schema = new mongoose.Schema({
         type:'string',
         default: 'off-duty'
     },
-    role:{
+    username:{
         type:'string',
         default:'Physician'
+    },
+    password:{
+        type:'string',
+        required:true,
+        unique:true
     }
 
 
 
 })
 
-module.exports = mongoose.model('user_collection', Schema);
+module.exports = mongoose.model('physician_collection', Schema);

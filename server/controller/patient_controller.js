@@ -92,7 +92,7 @@ exports.update_patient = async (req, res) => {
 
 //Delete user Via ID
 
-exports.delete = (req,res)=>{
+exports.delete_patient = (req,res)=>{
 
     const patientid = req.params.id;
 
@@ -108,3 +108,19 @@ exports.delete = (req,res)=>{
     });
 
 }
+
+
+exports.login_patient = async (req, res) => {
+    const { username, password } = req.body;
+    const patient_data = await patient.findOne({ username });
+  
+    if (patient_data && await bcrypt.compare(password, patient_data.password)) {
+        req.session.uid = patient_data._id;
+        req.session.username = patient_data.username;
+        req.session.role = 'patient';
+        res.redirect('/patient_dashboard');
+        //res.send('Login successful');
+    } else {
+      res.send('Invalid username or password');
+    }
+  }

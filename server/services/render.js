@@ -1,22 +1,18 @@
 const axios = require('axios');
 var sysAdmin = require('../model/admin_model');
-var physician_collection = require('../model/user_model');
+var physician_collection = require('../model/physician_model');
 var patient_collection = require('../model/patient_model');
 
-exports.admin_login = (req, res) => {
-    res.render('admin/admin_login',{title:"HMS | Administrator Login Page"});   
-}
+
 
 //------------------------------------------------------------------------------------------------------------------------
-
-
-exports.physician_login = (req, res) => {
-    res.render('physician_login',{title:"HMS | Physician Login Page"});   
+exports.admin_login = (req, res) => {
+  res.render('admin/admin_login',{title:"HMS | Administrator Login Page"});   
 }
-
 
 exports.admin_dashboard = async (req, res) => {
   try {
+      const role = req.session.role;
       const uid = req.session.uid;
       const username = req.session.username;
       const getadminData = await sysAdmin.findById(uid);
@@ -24,21 +20,30 @@ exports.admin_dashboard = async (req, res) => {
       if (!getadminData) {
           return res.status(404).send('No record found');
       }
-
-       const new_patient = await patient_collection.countDocuments({ status: 'New Patient' });
-       const established_patient = await patient_collection.countDocuments({ status: 'Established Patient' });
+        //fetch patient statuses
+        const new_patient = await patient_collection.countDocuments({ status: 'New Patient' });
+        const established_patient = await patient_collection.countDocuments({ status: 'Established Patient' });
         const outpatient = await patient_collection.countDocuments({ status: 'Outpatient' });
         const inpatient = await patient_collection.countDocuments({ status: 'Inpatient' });
 
-      // Count the number of on-duty users
-      const onDutyCount = await physician_collection.countDocuments({ status: 'on-duty' });
-      //Count the number of off-duty users
-      const offDutyCount = await physician_collection.countDocuments({ status: 'off-duty' });
+        // Count the number of on-duty physicians
+        const onDutyCount = await physician_collection.countDocuments({ status: 'on-duty' });
+        //Count the number of off-duty physicians
+        const offDutyCount = await physician_collection.countDocuments({ status: 'off-duty' });
     
-      res.render('admin/admin_dashboard', {title:"HMS | Admin Dashboard",username,getadminData,onDutyCount,offDutyCount,new_patient,established_patient,outpatient,inpatient});
+      res.render('admin/admin_dashboard', {title:"HMS | Admin Dashboard",username,getadminData,onDutyCount,offDutyCount,new_patient,established_patient,outpatient,inpatient,role});
   } catch (error) {
       return res.status(500).send(error.message);
   }
+}
+
+//------------------------------------------------------------------------------------------------------------------------
+exports.physician_login = (req, res) => {
+    res.render('physician_login',{title:"HMS | Physician Login Page"});   
+}
+
+exports.physician_dashboard = (req, res) => {
+  res.render('physician_dashboard',{title:"HMS | Physician Dasboard Page"});   
 }
 
 exports.new_physician = (req, res) => {
@@ -47,7 +52,7 @@ exports.new_physician = (req, res) => {
 
 exports.physicians = (req, res) => {
   const username = req.session.username;
-  axios.get('http://localhost:3000/api/users')
+  axios.get('http://localhost:3000/api/physician')
   .then(function(response){
       res.render('admin/admin_view_doctors',{title:"HMS | Physicians Page",username,physicians:response.data});
   }).catch(err=>{
@@ -55,7 +60,7 @@ exports.physicians = (req, res) => {
   }) 
 }
 exports.update_physician= (req, res) => {
-  axios.get('http://localhost:3000/api/users',{params:{id:req.query.id}}).then(function(physicianData){
+  axios.get('http://localhost:3000/api/physician',{params:{id:req.query.id}}).then(function(physicianData){
       res.render('admin/update_physician',{title:"HMS | Physician Update Page",user:physicianData.data})
   }).catch(err=>{res.send(err);
   })
@@ -68,6 +73,23 @@ exports.update_physician= (req, res) => {
 exports.patient_login = (req, res) => {
     res.render('patient_login',{title:"HMS | Patient Login Page"});   
 }
+
+// exports.patient_dashboard = (req, res) => {
+//   res.render('patient_dashboard',{title:"HMS | Patient Dasboard Page"});   
+// }
+exports.patient_dashboard = async (req, res) => {
+  try {
+    const role = req.session.role;
+    const pid = req.session.uid;
+    const patientData = await patient_collection.findById(pid);
+    const physician = await physician_collection.findById(patientData.physician);
+    res.render('patient_dashboard', { title: "HMS | Patient Dasboard Page", patientData,physician,role });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+}
+
 
 // exports.new_patient = (req, res) => {
 

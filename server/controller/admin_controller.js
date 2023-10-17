@@ -10,6 +10,7 @@ exports.validate_login = async (req, res) => {
     if (admin_data && await bcrypt.compare(password, admin_data.password)) {
         req.session.uid = admin_data._id;
         req.session.username = admin_data.username;
+        req.session.role = 'admin';
         res.redirect('/admin_dashboard');
 
       //res.send('Login successful');

@@ -40,13 +40,9 @@ var Schema = new mongoose.Schema({
     },
     password:{
         type:'string',
-        required:true
-    },
-
-
-
-
-
+        required:true,
+        unique:true
+    }
 })
 
 module.exports = mongoose.model('patient_collection', Schema);

@@ -1,11 +1,9 @@
-
-
 const express = require('express');
 const route = express.Router();
 
 
 const services =require('../services/render');
-const controller = require('../controller/user_controller');
+const physiciancontroller = require('../controller/physician_controller');
 const admincontroller = require('../controller/admin_controller');
 const patientcontroller = require('../controller/patient_controller');
 
@@ -24,9 +22,11 @@ route.get('/logout',services.logout);
 
 //physician Login
 route.get('/physician_login',services.physician_login)
+route.get('/physician_dashboard',services.physician_dashboard)
 
 //patient Login
 route.get('/',services.patient_login)
+route.get('/patient_dashboard',isAuthenticated,services.patient_dashboard)
 
 route.get('/register_patient',isAuthenticated,services.new_patient)
 route.get('/patients',isAuthenticated,services.patient)
@@ -35,19 +35,21 @@ route.get('/update_patient',isAuthenticated,services.update_patient)
 
 
 
-//API
-route.post('/api/users',controller.create);
-route.get('/api/users',controller.find);
-route.put('/api/users/:id',controller.update);
-route.delete('/api/users/:id',controller.delete);
+//API physician
+route.post('/api/physician',physiciancontroller.create_physician);
+route.get('/api/physician',physiciancontroller.find_physician);
+route.put('/api/physician/:id',physiciancontroller.update_physician);
+route.delete('/api/physician/:id',physiciancontroller.delete_physician);
 
 route.post('/login',admincontroller.validate_login);
 
-//AAPI patients
+//API patient
 route.post('/api/patients',patientcontroller.new_patient);
 route.get('/api/patients',patientcontroller.find_patient);
 route.put('/api/patients/:id',patientcontroller.update_patient);
-route.delete('/api/patients/:id',patientcontroller.delete);
+route.delete('/api/patients/:id',patientcontroller.delete_patient);
+
+route.post('/login_patient',patientcontroller.login_patient);
  
 
 

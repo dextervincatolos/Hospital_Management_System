@@ -17,7 +17,7 @@ main.container
                         each doctor in doctors
                             option(value=doctor._id , selected=patient.physician=== doctor._id)= doctor.firstname + " " + doctor.lastname 
                     div.invalid-feedback
-                        | Assined Physician is required.
+                        | Assigned Physician is required.
                   
                 div.row.g-3
                     div.col-sm-6
@@ -88,6 +88,6 @@ main.container
                             | Password is required.
                     hr.my-4
     
-                button.w-100.btn.btn-primary.btn-md(type="submit" name="submit") Register
+                button.w-100.btn.btn-primary.btn-md(type="submit" name="submit") Update Record
 script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer")
 script(src="js/patients.js")

@@ -35,7 +35,7 @@ exports.new_patient = async (req, res) => {
     });
 }
 
- //retrieve and return all/single user
+ //retrieve and return all/single user----------------------------------------------------------------------------------------------
 
 exports.find_patient = (req,res)=>{
 
@@ -66,6 +66,8 @@ exports.find_patient = (req,res)=>{
     
 }
 
+//update record---------------------------------------------------------------------------------------------------------------------
+
 exports.update_patient = async (req, res) => {
     if (!req.body) {
         return res.status(400).send({ message: "Content cannot be empty!" });
@@ -90,7 +92,7 @@ exports.update_patient = async (req, res) => {
     });
 }
 
-//Delete user Via ID
+//Delete Patient------------------------------------------------------------------------------------------------------------------------
 
 exports.delete_patient = (req,res)=>{
 
@@ -109,6 +111,7 @@ exports.delete_patient = (req,res)=>{
 
 }
 
+//Login-----------------------------------------------------------------------------------------------------------------------------------
 
 exports.login_patient = async (req, res) => {
     const { username, password } = req.body;

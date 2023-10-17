@@ -16,7 +16,7 @@ $(document).ready(function() {
          console.log(data);
 
          var request = {
-            "url": `http://localhost:3000/api/users/${data._id}`,
+            "url": `http://localhost:3000/api/physician/${data._id}`,
             "method": "PUT",
             "data": data
          }
@@ -33,7 +33,7 @@ $(document).ready(function() {
             var id = $(this).attr("data-id")
     
             var request = {
-                "url": `http://localhost:3000/api/users/${id}`,
+                "url": `http://localhost:3000/api/physician/${id}`,
                 "method": "DELETE"
              }
              if(confirm("Are you sure you want to delete this Record?")){

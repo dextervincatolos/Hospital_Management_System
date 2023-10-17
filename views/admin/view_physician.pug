@@ -1,0 +1,21 @@
+include ../include/_header.pug
+
+main.container
+    div.py-5.text-center
+        
+         
+    div.row.g-5
+        div.col-md-12.col-lg-12.row
+            div.col-md-2
+                img(src="img/physician.jpg" width="75%" alt="Patient" class="m-2")
+            div.col-md-10.text-center
+                h3.py-5 Physician ID: #{physicians._id}
+                h4.text-primary Dr. #{physicians.firstname + " " + physicians.lastname}
+            
+            hr
+            div.col-md-12.col-lg-12.px-5.py-2
+                h4=physicians.license
+                h6 Gender: #{physicians.gender}
+                h6 Contact Number: #{physicians.cnumber}
+                h6
+                    button.btn.btn-lg.form-control.btn-info(disabled="")=physicians.specialty

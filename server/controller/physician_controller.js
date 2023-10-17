@@ -3,36 +3,10 @@ var physician_data = require('../model/physician_model');
 
 const bcrypt = require('bcrypt');
 
-// exports.create_physician = (req,res)=>{
-//     //validate request
-//     if(!req.body){
-//         res.status(400).send({message:"Content cannot be empty!"});
-//         return;
-//     }
 
-//     //new user
-//     const user = new physician_data({
-//         firstname: req.body.firstname,
-//         lastname: req.body.lastname,
-//         license: req.body.license,
-//         gender: req.body.gender,
-//         specialty: req.body.specialty,
-//         cnumber: req.body.cnumber,
-//         role: req.body.role
-//     }) 
 
-//     //save user in db
 
-//     user.save().then(data=>{
-//         res.redirect('/physicians')
-//     }).catch(err=>{
-//         res.status(500).send({
-//             message:err.message || "Some error occured while executing operation!"
-//         });
-//     });
-
-// }
-
+//create a new record------------------------------------------------------------------------------------------------
 
 exports.create_physician = async (req, res) => {
     //validate request
@@ -66,7 +40,7 @@ exports.create_physician = async (req, res) => {
 }
 
 
-//retrieve and return all/single user
+//retrieve and return all/single user------------------------------------------------------------------------------------
 
 exports.find_physician = (req,res)=>{
 
@@ -97,25 +71,7 @@ exports.find_physician = (req,res)=>{
     
 }
 
-//update user via ID
-
-// exports.update_physician = (req,res)=>{
-//     if(!req.body){
-//         return res.status(400).send({message:"Content cannot be empty!"});
-//     }
-
-//     const userid = req.params.id;
-//     physician_data.findByIdAndUpdate(userid,req.body,{useFindAndModify:false}).then(data=>{
-//         if(!data){
-//             res.status(404).send({message:`Cannot Update user with ${userid}.User not found!`})
-//         }else{
-//             res.send(data)
-//         }
-//     }).catch(err=>{
-//         res.status(500).send({message:"Error Update user record"})
-//     })
-// }
-
+//Update Record -----------------------------------------------------------------------------------------------------------
 exports.update_physician = async (req, res) => {
     if(!req.body){
         return res.status(400).send({message:"Content cannot be empty!"});
@@ -140,7 +96,7 @@ exports.update_physician = async (req, res) => {
     })
 }
 
-//Delete user Via ID
+//Delete Physician----------------------------------------------------------------------------------------------------------
 
 exports.delete_physician = (req,res)=>{
 
@@ -158,3 +114,25 @@ exports.delete_physician = (req,res)=>{
     });
 
 }
+
+//Login-----------------------------------------------------------------------------------------------------------------------
+  
+exports.login_physician = async (req, res) => {
+    const { username, password } = req.body;
+    const physician = await physician_data.findOne({ username });
+  
+    if (physician && await bcrypt.compare(password, physician.password)) {
+        req.session.uid = physician._id;
+        req.session.username = physician.username;
+        req.session.license = physician.license;
+        req.session.role = 'physician';
+
+        // Update status to "on-duty"
+        await physician_data.updateOne({ _id: physician._id }, { $set: { status: 'on-duty' } });
+
+        res.redirect('/physician_dashboard');
+        //res.send('Login successful');
+    } else {
+      res.send('Invalid username or password');
+    }
+  }
